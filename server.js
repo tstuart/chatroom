@@ -11,6 +11,11 @@ var io = socket_io(server);
 
 io.on('connection', function (socket) {
     console.log('Client connected');
+
+    socket.on('message', function(message) {
+        console.log('Received Message:', message);
+        socket.broadcast.emit('message', message);
+    });
 });
 
 server.listen(8080);
